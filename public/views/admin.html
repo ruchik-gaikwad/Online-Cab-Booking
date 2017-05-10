@@ -1,0 +1,340 @@
+
+<div class="container admincontainer">
+  <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" data-target="#home">Driver And Cab Details</a></li>
+      <li><a data-toggle="tab" data-target="#menu1">Tariff Plan</a></li>
+      <li><a data-toggle="tab" data-target="#menu2">Assign-Cab</a></li>
+      <li><a data-toggle="tab" data-target="#menu3">Add Cab</a></li>
+      <li><a data-toggle="tab" data-target="#menu4">Coustemer Data</a></li>
+
+    </ul>
+
+    <div class="tab-content">
+
+
+      <div id="home" class="tab-pane fade in active">
+
+
+                    <div class="container">
+                      <div class="col-lg-12 col-sm-12 col-md-12 col-xs12">
+                        <br>
+                      </div>
+
+                      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+
+                        <img class="mythumbnail" ng-src = "{{ thumbnail.dataUrl || 'https://financemd.files.wordpress.com/2015/08/facebook-default-no-profile-pic.jpg' }}">
+                          <br>
+                      <div ng-show = "uploading" class="progress">
+                        <div  class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:100%;">
+                            <span class="sr-only"></span>
+                        </div>
+                      </div>
+                        <br>
+                      <form ng-submit = "Submit();">
+                        <label class="btn btn-success">Browse
+                        <input type="file" ng-model = "cabr.cabrimg" file-model = "file.upload" name="myfile" ng-disabled = "uploading" style="display : none;" onchange="angular.element(this).scope().photochanged(this.files)">
+                          </label>
+                        <br>
+                        <br>
+                        <button class="btn btn-primary" ng-disabled = "uploading">Upload</button>
+                      </form>
+
+                      <br>
+
+                      <br>
+
+                      <div ng-show = "message">
+                        <div ng-class = "alert">{{ message }}</div>
+                      </div>
+
+                    </div>
+
+
+                      <div class="col-lg-5 col-sm-6">
+                          <div class="panel panel-info">
+                            <div class="panel-heading">Driver Details</div>
+
+                            <div class="panel-body">
+                              <input type="text" ng-model = "dvrd.FirstName" class="form-control" placeholder="First Name"/>
+                              <br>
+                              <input type="text" ng-model = "dvrd.LastName" class="form-control" placeholder="Last Name"/>
+                              <br>
+                              <textarea type="text" ng-model = "cabr.cabrdriverAdd" class="form-control" placeholder="Address"/></textarea>
+                                                            <br>
+                              <input type="text" ng-model = "dvrd.MobileNumber" class="form-control" placeholder="Contact No"/>
+                                                            <br>
+                              <input type="text" ng-model = "dvrd.Email" class="form-control" placeholder="Email Address"/>
+                                                            <br>
+                              <input type="text" ng-model = "cabr.cabrdriverLicenseno" class="form-control" placeholder="License No"/>
+
+                            </div>
+                          </div>
+
+
+
+
+                        <div class="panel panel-info">
+                          <div class="panel-heading">Cab Details</div>
+                          <div class="panel-body">
+                            <select class="form-control" ng-model = "cabr.cabrType">
+                              <option>Micro</option>
+                              <option>Mini</option>
+                              <option>Prime Sedan</option>
+                              <option>Prime Suv</option>
+                            </select>                              <br>
+                            <input type="text" ng-model = "cabr.cabrMake" class="form-control" placeholder="Make"/>
+                                                          <br>
+                            <input type="text" ng-model = "cabr.cabrModel" class="form-control" placeholder="Model"/>
+                                                          <br>
+                            <input type="text" ng-model = "cabr.cabrRegno" class="form-control" placeholder="Registration No"/>
+
+                          </div>
+                          <br>
+                        </div>
+                        <button class="btn btn-primary btn-block" ng-click="addcabDriver(cabr); addDvrDtl(dvrd);">Add Details</button>
+
+
+
+
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="table-responsive">
+                      <table class="table table-hover">
+                        <tr>
+                          <th>Photo</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Phone</th>
+                          <th>Type</th>
+                          <th>Delete</th>
+
+                        </tr>
+                        <tr ng-repeat = "dvrd in dvrdList | filter:'Driver'">
+                          <td><img ng-repeat = "cabr in cabrList"  ng-src = "./public/resourses/uploads/images/{{cabr.cabrimg}}"></img></td>
+                          <td>{{dvrd.FirstName}}</td>
+                          <td>{{dvrd.Email}}</td>
+                          <td>{{dvrd.MobileNumber}}</td>
+                          <td>{{dvrd.UserType}}</td>
+                          <!-- <td><button ng-click = "editcabDriver(cabr)" class = "btn btn-warning"></button></td> -->
+                          <td><button ng-click = "deletecabDriver(cabr); deleteDvrDtl(dvrd);" class="btn btn-danger"></button></td>
+
+                        </tr>
+                      </table>
+                    </div>
+                    </div>
+
+
+
+
+                      <!-- <table>
+                        <tr ng-repeat = "cabr in cabrList">
+                          <td><img ng-src = "{{cabr.cabrimg}}"</td>
+                        </tr>
+                      </table>
+
+
+ -->
+
+
+
+
+
+
+
+
+
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+      <div id="menu1" class="tab-pane fade">
+
+        <button type="button" class="btn btn-info btn-block adddvr" data-toggle="modal" data-target="#2modal">
+          Add New Tariff
+        </button>
+
+
+              <div class="modal fade" id="2modal" role="dialog">
+                  <div class="modal-dialog modal-md">
+
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Add New Tariff Plan</h4>
+                          </div>
+                          <div class="modal-body">
+
+
+
+
+                                <!-- <label>Car Model</label>
+                                <input ng-model ="dvrd.dvrdcar" class="form-control" id="focusedInput" type="text"/>
+                                <label>Type</label>
+                                <input ng-model ="dvrd.dvrdtype" class="form-control" id="focusedInput" type="text"/>
+                                <label>Registration No.</label>
+                                <input ng-model ="dvrd.dvrdregno" class="form-control" id="focusedInput" type="text"/>
+ -->
+
+                                <select class="form-control" ng-model = "Trf.Type">
+                                  <option>Micro</option>
+                                  <option>Mini</option>
+                                  <option>Prime Sedan</option>
+                                  <option>Prime SUV</option>
+                                </select>
+                                <br>
+                                <input type = "text" class="form-control" ng-model = "Trf.NrmRt" placeholder="Normal Hour Rate Per KM"/>
+                                <br>
+                                <input type  = "text" class="form-control" ng-model = "Trf.PekRt" placeholder="Peak Hour Rate Per KM"/>
+                                <br>
+                                <input type ="text" id= "timepicker" name = "timepicker" class="timepicker form-control" ng-model = "Trf.StPekTm" placeholder="Strat Time"/>
+                                <br>
+                                <input type ="text" id = "timepicker" name = "timepicker" class="timepicker form-control" ng-model = "Trf.EnPekTm" placeholder="End Time"/>
+                                <br>
+                                <select class="form-control" ng-model = "Trf.Status">
+                                  <option>Enable</option>
+                                  <option>Disable</option>
+                                </select>
+                                <button ng-click="addTariff(Trf)" class="btn btn-primary btn-block" style="margin-top:10px;">Add Car</button>
+
+
+
+
+
+                          </div>
+                          <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                          </div>
+                          </div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="table-responsive" style="margin-top:10px;">
+                    <table class="table table-hover">
+                      <tr>
+                        <th>Cab Type</th>
+                        <th>Normal Hour Rate</th>
+                        <th>Peak Hour Rate</th>
+                        <th>Start Peak Time</th>
+                        <th>End Peak Time</th>
+
+                        <th>Operation</th>
+                      </tr>
+                      <tr ng-repeat= "Trf in TrfList">
+                        <td>{{Trf.Type}}</td>
+                        <td>Rs/-{{Trf.NrmRt}}</td>
+                        <td>Rs/-{{Trf.PekRt}}</td>
+                        <td>{{Trf.StPekTm}}</td>
+                        <td>{{Trf.EnPekTm}}</td>
+
+                        <td><button ng-click="deleteTariff(Trf)" class="btn btn-danger">Remove</button></td>
+                      </tr>
+                    </table>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+      <div id="menu2" class="tab-pane fade">
+
+
+
+        <button type="button" class="btn btn-info btn-block adddvr" data-toggle="modal" data-target="#3modal">
+          Add Car Details
+        </button>
+
+
+              <div class="modal fade" id="3modal" role="dialog">
+                  <div class="modal-dialog modal-md">
+
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Assign Cab</h4>
+                          </div>
+                          <div class="modal-body">
+                          <!-- the details -->
+
+
+
+                                <label>Select Driver</label>
+                                <select class = "form-control" ng-model="asmv.asmvDvrNm">
+                                  <option ng-repeat="d in cabrList" value="{{d.cabrdriverName}}">{{d.cabrdriverName}}</option>
+                                </select>
+                                <label>Phone No</label>
+                                <select class = "form-control" ng-model = "asmv.asmvDvrPhno">
+                                <option ng-repeat ="s in cabrList | filter : asmv.asmvDvrNm">{{s.cabrdriverPhoneno}}</option>
+                                </select>
+                                <label>Car Type</label>
+                                <select class = "form-control" ng-model = "asmv.asmvCarTyp">
+                                  <option ng-repeat = "x in dvrdList">{{x.dvrdtype}}</option>
+                                </select>
+                                <label>Select Car Model</label>
+                                  <select class = "form-control" ng-model="asmv.asmvCarNm" >
+                                  <option ng-repeat = "f in dvrdList | filter : asmv.asmvCarTyp" value="{{f.dvrdcar}}">{{f.dvrdcar}}</option>
+                                </select>
+
+                                <button ng-click="addData(asmv)" class="btn btn-primary btn-block" style="margin-top:10px;">Assign Cab</button>
+
+
+
+
+
+                          </div>
+                          <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                          </div>
+                          </div>
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="table-responsive" style="margin-top:10px;">
+                    <table class="table table-hover">
+                      <tr>
+                        <th>Driver Name</th>
+                        <th>Driver Phone No</th>
+                        <th>Car Type</th>
+                        <th>Car Model</th>
+                        <th>Operation</th>
+                      </tr>
+                      <tr ng-repeat= "asmv in asmvList">
+                        <td>{{asmv.asmvDvrNm}}</td>
+                        <td>{{asmv.asmvDvrPhno}}</td>
+                        <td>{{asmv.asmvCarTyp}}</td>
+                        <td>{{asmv.asmvCarNm}}</td>
+
+                        <td><button ng-click="deleteData(asmv)" class="btn btn-danger">Remove</button></td>
+                      </tr>
+                    </table>
+                    </div>
+
+
+      </div>
+      <div id="menu3" class="tab-pane fade">
+        <h3>Menu 3</h3>
+        <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      </div>
+    </div>
+</div>

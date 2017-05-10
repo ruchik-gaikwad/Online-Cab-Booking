@@ -1,0 +1,134 @@
+
+<!-- controlls -->
+<div class="col-lg-6">
+<label> Pick up Location</label>
+<input id ="start" class="form-control">
+<br>
+<label>Destination</label>
+<input id="dest" class="form-control">
+
+<br>
+<div class="carType" style="border:1px solid green; border-radius: 3px;" >
+  <div class="car" style="padding-top:10px; padding-bottom:10px; padding-left:55px; padding-right:10px; display:inline-flex;">
+
+    <button class="btn btn-default" style="display:grid; margin-right: 30px;" id="mini" ng-click = 'micro();'>
+    <img class="img-circle" src="./resourses/images/image1.jpg" style="hright:80px; width:80px;">
+    <p>Micro</p>
+  </button>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="btn btn-default" style="display:grid; margin-right: 30px;" id="micro" ng-click = 'mini();'>
+  <img class="img-circle" src="./resourses/images/image2.jpg" style="hright:80px; width:80px;">
+
+Mini
+</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+<button class="btn btn-default" style="display:grid; margin-right: 30px;" id="sedan" ng-click = 'sedan();'>
+<img class="img-circle" src="./resourses/images/image3.jpg" style="hright:80px; width:80px;">
+Prime Sedan
+</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+<button class="btn btn-default" style="display:grid; margin-right: 30px;" id="primesuv" ng-click = 'suv();'>
+<img class="img-circle" src="./resourses/images/image4.jpg" style="hright:80px; width:80px;">
+Prime Suv
+</button>
+  </div>
+
+</div>
+<button class="btn btn-success btn-block" ng-click = "estm();" style="margin-top: 10px; margin-bottom:10px;"> Get estimated Fare</button>
+
+<div id="rewr" style="border: 1px solid #0075ff; display : -webkit-box;"  ng-show = "rideDetails">
+
+<div id="distance" style="border:1px solid #0075ff; height: 112px; border-radius: 3px;
+    width: 170px;">
+
+<center><img class="img-circle" src="./resourses/images/distance.png" style="height:80px; width:80px"></center>
+<center><p id="estmdist"></p></center>
+
+</div>
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+<div id="duration" style="border:1px solid #0075ff; height: 112px; border-radius: 3px;
+    width: 170px;";>
+<center><img class="img-circle" src="./resourses/images/duration.png" style="height:80px; width:80px padding-bottom:5px;"></center>
+<center><p id="estmdur"></p></center>
+</div>
+  &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+<div id="fare" style="border:1px solid #0075ff; height: 112px; border-radius: 3px;
+    width: 170px;";>
+<center><img class="img-circle" src="./resourses/images/fare.png" style="height:80px; width:80px"></center>
+<center><p id="estmfare"></p></center>
+</div>
+
+
+
+</div>
+<br>
+<div id="booknow" ng-show ="rideDetails" >
+  <button class="btn btn-success col-lg-6 col-sm-6" id="ridenow" ng-click = "RideNow();">Ride Now</button>
+  <button class="btn btn-warning col-lg-6 col-sm-6" data-toggle="modal" data-target="#myModal">Ride Later</button>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Schedule Your Ride</h4>
+        </div>
+        <div class="modal-body well-sm">
+          <input type="date" id = "pickdate" class="form-control" placeholder="Choose Pickup Date">
+          <br>
+          <input type="text" id= "timepicker" name = "timepicker" class="timepicker form-control" placeholder="Choose Pickup Time">
+          <br>
+          <input id ="modalstart" class="form-control" placeholder="Pickup Location">
+          <br>
+          <input id ="modaldest" class="form-control" placeholder="Destination Location">
+          <br>
+          <select class="form-control" placeholder = "Choose Cab Type">
+            <option value="Micro">Micro</option>
+            <option value="Mini">Mini</option>
+            <option value="Prime Sedan">Prime Sedan</option>
+            <option value="Prime SUV">Prime SUV</option>
+          </select>
+          <button style = "margin-top:10px;" class="btn btn-success btn-block" ng-click = "RideLater();">Book Advanced Ride</button>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="Modal" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss = "modal">&times;</button>
+          <h4 class="modal-title">Your Cab is Booked</h4>
+      </div>
+      <div class="modal-body">
+        <p id="drivername"></p>
+          <p id="contactno"></p>
+          <p id="pickup"></p>
+          <p id="destinationloc"></p>
+          <p id="vehical"></p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- map -->
+<div class="col-lg-6">
+
+<div id="map" ng-init = "initMap();"></div>
+
+</div>

@@ -1,0 +1,55 @@
+<style>
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+
+
+/* Add padding to container elements */
+
+/* Clear floats */
+
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+       width: 100%;
+    }
+}
+
+form{
+  margin-top: 14px;
+}
+</style>
+
+
+
+<form style="border:1px solid #ccc">
+    <center><h2>Signup</h2></center>
+  <div class="container">
+
+    <input type="text" ng-model = "user.FirstName" placeholder="Enter First Name"  required>
+
+
+    <input type="text"  ng-model = "user.LastName" placeholder="Enter Last Name"  required>
+
+
+    <input type="text" ng-model = "user.Email" placeholder="Email"  required>
+
+    <input type="text" ng-model = "user.MobileNumber" placeholder="Contact Number"  required>
+
+<input type="text" ng-model = "user.Password" placeholder="Password" name="psw-repeat" required>
+
+      <button type="submit"  ng-click = "reg();"class="btn btn-info btn-block" >Sign Up</button>
+      <div ng-show = "message">
+        <div ng-class = "alert">{{ message }}</div>
+      </div>
+  </div>
+</form>

@@ -1,0 +1,31 @@
+<nav class="navbar navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" href="#/">Cab Book</a>
+    </div>
+
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-left">
+      <li><a href="#/home">Home</a></li>
+      <li ng-show = "isLoggedIn && UserType == 'Driver' "><a href="#/driver">My Driving Details</a></li>
+      <li ng-show = "isLoggedIn && UserType == 'Customer' "><a href="#/booking">Book Cab</a></li>
+      <li ng-show = "isLoggedIn && UserType == 'Admin'"><a href = "#/admin">Admin</a></li>
+      <li ng-show = "isLoggedIn && (UserType == 'Customer' || UserType == 'Driver')"><a href = "#/myride">Past Bookings</a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li ng-show = "!isLoggedIn"><a href="#/login">Login</a></li>
+      <!-- <li><a href="#/">Logout</a></li> -->
+      <li ng-show = "!isLoggedIn"><a href = "#/register">Register</a></li>
+      <li ng-show = "isLoggedIn"><a href = '#/home' ng-click = 'logout();' >Logout</a></li>
+      <li ng-show = "isLoggedIn"><a href = '#/changePassword'>Change Passcode</a></li>
+      <li ng-show = "isLoggedIn"><a href = '#/home'>Welcome, {{userName}}</a></li>
+
+    </ul>
+  </div>
+
+  </div>
+</nav>
